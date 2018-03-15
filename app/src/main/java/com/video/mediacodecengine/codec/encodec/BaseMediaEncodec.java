@@ -135,30 +135,8 @@ public class BaseMediaEncodec {
     }
 
     private void encodecOutput(int encoderStatus,ByteBuffer outputBuffer,MediaFormat bufferFormat,MediaCodec.BufferInfo bufferInfo,MediaCodec mediaCodec){
-        if (encoderStatus >= 0) {
-            byte[] outData = new byte[bufferInfo.size];
-            outputBuffer.get(outData);
-            if (outputBuffer == null) {
-                throw new RuntimeException("encoderOutputBuffer " + outputBuffer + " was null");
-            }
-            //
-            if ((bufferInfo.flags & MediaCodec.BUFFER_FLAG_CODEC_CONFIG) != 0) {
-                //bufferInfo.size = 0;
-            }
-            else{
-                //use outData
-            }
-            mediaCodec.releaseOutputBuffer(encoderStatus,false);
-        } else if (encoderStatus == MediaCodec.INFO_OUTPUT_BUFFERS_CHANGED) {
-            //拿到输出缓冲区,用于取到编码后的数据
-            //outputBuffers = mediaCodec.getOutputBuffers();
-        } else if (encoderStatus == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED) {
-            // Subsequent data will conform to new format.
-            //MediaFormat format = codec.getOutputFormat();
-        } else if (encoderStatus == MediaCodec.INFO_TRY_AGAIN_LATER){
-
-        }else{
-
+        if(mediaEncodecCallBack!=null){
+            mediaEncodecCallBack.encodecOutput(encoderStatus,outputBuffer,bufferFormat,bufferInfo,mediaCodec);
         }
     }
     private long computePresentationTime(long frameIndex) {

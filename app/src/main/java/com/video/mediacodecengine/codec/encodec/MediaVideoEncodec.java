@@ -69,11 +69,6 @@ public class MediaVideoEncodec extends BaseMediaEncodec {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
             AsynchronousProcessingUsingBuffers();
         }
-        else{
-            SynchronousProcessingUsingBufferArrays();
-        }
-
-
     }
     public Surface getmSurface(){
         return mSurface;

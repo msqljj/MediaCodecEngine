@@ -49,12 +49,12 @@ public class MediaEncodecManage {
                 mediaEncodecCallBack=new StreamH264MediaEncodeInterface(path);
                 break;
         }
-
-
+    }
+    public void onFrameDraw(byte[] data){
+        mediaVideoEncodec.putVideoData(data);
     }
     public void startEncodec(){
         mediaVideoEncodec.startCodec();
-
     }
 
     public void stopEncodec(){

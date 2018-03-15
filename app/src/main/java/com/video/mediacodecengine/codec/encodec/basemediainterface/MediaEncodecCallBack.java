@@ -10,5 +10,6 @@ import java.nio.ByteBuffer;
  */
 
 public abstract class MediaEncodecCallBack {
+    protected static final int MAC_QUEUE=3;
     public abstract void encodecOutput(int encoderStatus, ByteBuffer outputBuffer, MediaFormat bufferFormat, MediaCodec.BufferInfo bufferInfo, MediaCodec mediaCodec);
 }

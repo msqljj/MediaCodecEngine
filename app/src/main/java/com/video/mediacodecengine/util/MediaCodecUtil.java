@@ -44,7 +44,7 @@ public class MediaCodecUtil {
         MediaCodecInfo codecInfo = null;
         for(int i = 0; i < numCodecs && codecInfo == null ; i++){
             MediaCodecInfo info = MediaCodecList.getCodecInfoAt(i);
-            if(!info.isEncoder()){
+            if(!info.isEncoder()){//筛选编码器
                 continue;
             }
             String[] types = info.getSupportedTypes();

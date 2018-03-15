@@ -12,6 +12,7 @@ import android.widget.Button;
 
 import com.video.mediacodecengine.camera.CameraManage;
 import com.video.mediacodecengine.codec.MediaCodecManage;
+import com.video.mediacodecengine.codec.encodec.MediaEncodecManage;
 import com.video.mediacodecengine.util.GlUtil;
 import com.video.mediacodecengine.util.ScreenUtill;
 import com.video.mediacodecengine.view.GlSurfaceViewManage;
@@ -32,7 +33,7 @@ public class MainActivity extends Activity {
     private int textureOESId;
     private SurfaceTexture surfaceTexture;
     private Camera.PreviewCallback previewCallback;
-    private MediaCodecManage mediaCodecManage;
+    private MediaEncodecManage mediaEncodecManage;
     private boolean startCodec;
     private GlSurfaceViewManage glSurfaceViewManage;
     @Override
@@ -54,7 +55,7 @@ public class MainActivity extends Activity {
             @Override
             public void onPreviewFrame(byte[] data, Camera camera) {
                 if(startCodec){
-                    mediaCodecManage.onFrameDraw(data);
+                    mediaEncodecManage.onFrameDraw(data);
                 }
 
             }
@@ -82,14 +83,15 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if(!startCodec) {
-                    if (mediaCodecManage == null) {
-                        mediaCodecManage = new MediaCodecManage(MainActivity.this, previewSizeWidth, previewSizeHeight, CameraManage.getInstance().getFPS());
+                    if (mediaEncodecManage == null) {
+                        mediaEncodecManage = new MediaEncodecManage(MainActivity.this, previewSizeWidth, previewSizeHeight, CameraManage.getInstance().getFPS(),
+                                null,MediaEncodecManage.SAVE_STREAM_H264);
                     }
-                    mediaCodecManage.startCodec();
+                    mediaEncodecManage.startEncodec();
 
                 }
                 else{
-                    mediaCodecManage.stopCodec();
+                    mediaEncodecManage.stopEncodec();
                 }
                 startCodec=!startCodec;
             }
