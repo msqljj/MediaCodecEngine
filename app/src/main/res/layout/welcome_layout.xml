@@ -9,13 +9,13 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:scaleType="centerCrop"
-        android:src="@drawable/logo"/>
+        android:src="@mipmap/ic_launcher"/>
     <TextView
         android:id="@+id/apk_version"
         android:layout_width="wrap_content"
         android:layout_height="100dp"
         android:textSize="20sp"
-        android:text="1.0.12021.25"
+        android:text="15"
         android:layout_below="@id/logo_view"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"

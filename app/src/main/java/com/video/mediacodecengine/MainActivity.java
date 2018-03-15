@@ -3,6 +3,8 @@ package com.video.mediacodecengine;
 import android.app.Activity;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
+import android.opengl.EGL14;
+import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +14,7 @@ import com.video.mediacodecengine.camera.CameraManage;
 import com.video.mediacodecengine.codec.MediaCodecManage;
 import com.video.mediacodecengine.util.GlUtil;
 import com.video.mediacodecengine.util.ScreenUtill;
+import com.video.mediacodecengine.view.GlSurfaceViewManage;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -31,6 +34,7 @@ public class MainActivity extends Activity {
     private Camera.PreviewCallback previewCallback;
     private MediaCodecManage mediaCodecManage;
     private boolean startCodec;
+    private GlSurfaceViewManage glSurfaceViewManage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +48,7 @@ public class MainActivity extends Activity {
     }
 
     private void initData(){
+        glSurfaceViewManage=new GlSurfaceViewManage(this,surfaceView);
         startCodec=false;
         previewCallback=new Camera.PreviewCallback() {
             @Override
@@ -54,7 +59,7 @@ public class MainActivity extends Activity {
 
             }
         };
-        surfaceView.setRenderer(new GLSurfaceView.Renderer() {
+        glSurfaceViewManage.initSurface(new GLSurfaceView.Renderer() {
             @Override
             public void onSurfaceCreated(GL10 gl, EGLConfig config) {
 
